@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+header {
+    background-image: url('/storage/app/public/images/sp_top_header.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 310px;
+}
+body {
+    background-image: url('/storage/app/public/images/68-688695_spongebob-background.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:cover;
+    background-attachment: fixed;
+    height: 100vh;
+    width: 100%;
+}
+
+.menu-btn {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    z-index: 3;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: skyblue;
+    color: #fff;
+}
+
+/* メニュー本体 */
+.menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: skyblue;
+}
+/* アニメーション部分 */
+.menu {
+    transform: translateX(100vw);
+    transition: all .3s linear;
+    list-style: none;
+    color:white;
+}
+
+.menu.is-active {
+    transform: translateX(0);
+}
+/* ここまで */
+
+.flex-container {
+    display: flex;
+    flex-wrap : wrap;
+    justify-content: space-between;
+}
+
+.flex-item {
+    width: 30%;
+    margin: 10px;
+    text-align: center;
+}
+
+.flex-item li {
+    padding: 5px;
+    font-size: large;
+    font-style:italic;
+}
+
+.profile-image {
+    width: 100%;
+}
+
+.profile-info {
+    list-style: none;
+    margin-top: 10px;
+    padding: 0;
+    font-size: 14px;
+}
