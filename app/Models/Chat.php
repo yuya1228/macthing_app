@@ -13,7 +13,6 @@ class Chat extends Model
 
     protected $fillable = [
         'message',
-        'is_read',
     ];
 
     public function users()

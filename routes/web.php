@@ -21,6 +21,7 @@ use App\Http\Controllers\ChatController;
 Route::resource('user_profile', User_ProfileController::class);
 
 Route::get('/chat',[ChatController::class,'chat'])->name('chat');
+Route::post('/chat',[ChatController::class,'store'])->name('chat.store');
 
 // admin専用画面
 Route::get('admin/admin_create',[AdminController::class,'create'])->name('admin.create');
