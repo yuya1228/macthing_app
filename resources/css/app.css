@@ -143,3 +143,9 @@ body {
 .profile-create li {
     padding: 1%;
 }
+
+/* チャットページデザイン */
+.list-group {
+    overflow:scroll;
+    height: 200px;
+}
