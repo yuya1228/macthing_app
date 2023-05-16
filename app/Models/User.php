@@ -12,21 +12,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public function profile()
-    {
-        return $this->hasOne(Profile::class);
-    }
-
-    public function machings()
-    {
-        return $this->belongsToMany(Maching::class, 'maching_user');
-    }
-
-    public function cats()
-    {
-        return $this->hasMany(Chat::class);
-    }
-
     /**
      * The attributes that are mass assignable.
      *
@@ -36,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -56,4 +42,31 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // プロフィールテーブルとのリレーション
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    // マッチングテーブルとのリレーション
+    public function machings()
+    {
+        return $this->belongsToMany(Maching::class, 'maching_user');
+    }
+
+    // チャットテーブルとのリレーション
+    public function chats()
+    {
+        return $this->hasMany(Chat::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($user){
+            $user->profile()->delete();
+        });
+    }
 }

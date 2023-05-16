@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('sender_id');
-            $table->unsignedBigInteger('recipient_id');
-            $table->text('message');
-            $table->boolean('is_read')->default(0);
+            $table->unsignedBigInteger('sender_id')->comment('メッセージ送信者');
+            $table->unsignedBigInteger('recipient_id')->comment('メッセージ受信者');
+            $table->text('message')->comment('メッセージ本文');
+            $table->boolean('is_read')->default(0)->comment('メッセージの既読の有無');
             $table->timestamps();
 
             $table->foreign('sender_id')->references('id')->on('users');

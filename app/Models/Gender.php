@@ -5,19 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Chat extends Model
+class Gender extends Model
 {
     use HasFactory;
 
-    protected $table = 'chats';
+    protected $table='genders';
 
     protected $fillable = [
-        'message',
-        'is_read',
+        'gender'
     ];
 
-    public function users()
+    public function profile()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(Profile::class);
     }
 }

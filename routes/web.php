@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User_ProfileController;
 use App\Http\Controllers\MachingController;
+use App\Http\Controllers\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +17,16 @@ use App\Http\Controllers\MachingController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::resource('user_profile', User_ProfileController::class);
+
+Route::get('/chat',[ChatController::class,'chat'])->name('chat');
+
+// admin専用画面
+Route::get('admin/admin_create',[AdminController::class,'create'])->name('admin.create');
+Route::post('admin/store',[AdminController::class,'store'])->name('admin.store');
+// ここまで
+
 Route::resource('maching', MachingController::class);
 
 Route::get('/dashboard', function () {

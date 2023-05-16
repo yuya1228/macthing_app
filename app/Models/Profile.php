@@ -15,11 +15,27 @@ class Profile extends Model
         'image',
         'text',
         'age',
-        'hobby'
+        'hobby',
+        'gender_id',
     ];
 
+    // ユーザーテーブルとリレーション
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function gender()
+    {
+        return $this->belongsTo(Gender::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($profile) {
+            $profile->users()->delete();
+        });
     }
 }
