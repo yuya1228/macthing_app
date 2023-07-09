@@ -111,6 +111,7 @@ services:
             PMA_HOST: mysql
         networks:
             - sail
+        platform: linux/amd64
 networks:
     sail:
         driver: bridge
