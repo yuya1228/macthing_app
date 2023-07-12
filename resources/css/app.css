@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 header {
-    background-image: url('/storage/app/public/images/sp_top_header.jpg');
+    background-image: url("/storage/app/public/images/sp_top_header.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     height: 310px;
 }
 body {
-    background-image: url('/storage/app/public/images/68-688695_spongebob-background.jpg');
+    background-image: url("/storage/app/public/images/68-688695_spongebob-background.jpg");
     background-repeat: no-repeat;
     background-position: center center;
-    background-size:cover;
+    background-size: cover;
     background-attachment: fixed;
     height: 100vh;
     width: 100%;
@@ -49,9 +49,9 @@ body {
 /* アニメーション部分 */
 .menu {
     transform: translateX(100vw);
-    transition: all .3s linear;
+    transition: all 0.3s linear;
     list-style: none;
-    color:white;
+    color: white;
 }
 
 .menu.is-active {
@@ -62,7 +62,7 @@ body {
 /* 一覧ページ */
 .flex-container {
     display: flex;
-    flex-wrap : wrap;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
@@ -107,13 +107,13 @@ body {
     margin: 10px;
     text-align: center;
     text-shadow: 3px -2px 5px blue;
-    color :white;
+    color: white;
 }
 
 .flex-item li {
     padding: 5px;
     font-size: large;
-    font-style:italic;
+    font-style: italic;
 }
 
 .profile-image {
@@ -132,7 +132,7 @@ body {
     padding-bottom: 20%;
     text-align: center;
     text-shadow: 3px -2px 5px blue;
-    color :white;
+    color: white;
 }
 
 /* ユーザー作成ページ */
@@ -173,5 +173,14 @@ body {
 
 .mail_button:hover {
     background-color: greenyellow;
+}
+
+.mail_message {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border: 1px solid #ebccd1;
+    border-radius: 5px;
+    display: inline-block;
 }
 /* ここまで */
