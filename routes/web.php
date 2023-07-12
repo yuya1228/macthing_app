@@ -4,8 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User_ProfileController;
-use App\Http\Controllers\MachingController;
-use App\Http\Controllers\ChatController;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,17 +17,18 @@ use App\Http\Controllers\ChatController;
 |
 */
 
+// マッチングアプリ
 Route::resource('user_profile', User_ProfileController::class);
 
-Route::get('/chat',[ChatController::class,'chat'])->name('chat');
-Route::post('/chat',[ChatController::class,'store'])->name('chat.store');
+// メール機能
+Route::resource('mail',MailController::class)->only(['create','store','show','delete']);
+Route::get('/message/{user}',[MailController::class,'recipientMail'])->name('mail.recipient');
+Route::post('/message/sendMail/{user_id}',[MailController::class,'sendMail'])->name('mail.sendMail');
 
 // admin専用画面
 Route::get('admin/admin_create',[AdminController::class,'create'])->name('admin.create');
 Route::post('admin/store',[AdminController::class,'store'])->name('admin.store');
 // ここまで
-
-Route::resource('maching', MachingController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

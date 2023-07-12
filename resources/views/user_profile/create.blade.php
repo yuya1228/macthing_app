@@ -7,10 +7,6 @@
         <div class="create-message">
             {{ session('comment') }}
         </div>
-    @else
-        <div>
-            <p class="text-white bg-red-300 rounded-md p-2 m-5 inline-block">登録に失敗しました。</p>
-        </div>
     @endif
 
     <h1 class="text-4xl py-10 font-mono text-center">ユーザー新規登録</h1>

@@ -58,6 +58,11 @@
                                     <a href="{{ route('user_profile.show', ['user_profile' => $user->id]) }}"
                                         class="bg-green-500 hover:bg-green-300 text-white p-3 rounded-md">プロフィールを確認する！</a>
                                 </li>
+                                <li class="mt-3">
+                                    <a href="{{ route('mail.recipient',['user'=>$user->id]) }}">
+                                    メッセージを送る。
+                                    </a>
+                                </li>
                                 @can('admin')
                                     <li>
                                         <form action="{{ route('user_profile.destroy', ['user_profile' => $user->id]) }}"

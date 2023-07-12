@@ -27,7 +27,7 @@ class ProfileRequest extends FormRequest
             'password'=>'required|string|min:5',
             'image'=>'required',
             'text'=> 'required|string',
-            'age'=>'required|numeric|min:18|max:20',
+            'age'=>'required|numeric|min:18|max:100',
             'hobby'=>'required|string',
             'gender_id'=>'required|numeric',
         ];

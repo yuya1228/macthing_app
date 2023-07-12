@@ -49,24 +49,8 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
-    // マッチングテーブルとのリレーション
-    public function machings()
+    public function  mails()
     {
-        return $this->belongsToMany(Maching::class, 'maching_user');
-    }
-
-    // チャットテーブルとのリレーション
-    public function chats()
-    {
-        return $this->hasMany(Chat::class);
-    }
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::deleting(function ($user){
-            $user->profile()->delete();
-        });
+        return $this->hasMany(Mail::class);
     }
 }

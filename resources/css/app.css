@@ -144,3 +144,34 @@ body {
     padding: 1%;
 }
 
+/* メールページ */
+.mail_page {
+    text-align: center;
+}
+
+.mail_page h2 {
+    font-size: 2.25rem;
+    font-style: italic;
+    margin-top: 10%;
+    margin-bottom: 5%;
+}
+
+.recipient_user {
+    font-size: 2rem;
+}
+
+.mail_page li {
+    padding: 1%;
+}
+
+.mail_button {
+    background-color: blue;
+    color: white;
+    padding: 0.5%;
+    border-radius: 5px;
+}
+
+.mail_button:hover {
+    background-color: greenyellow;
+}
+/* ここまで */

@@ -6,9 +6,11 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-var app = new Vue({
-    el: '#app',
-    data: {
-        open: false,
-    }
-})
+const app = Vue.createApp({
+    data() {
+        return {
+            open: false
+        };
+    },
+});
+app.mount('#app');
