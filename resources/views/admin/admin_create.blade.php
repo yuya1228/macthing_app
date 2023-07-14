@@ -3,7 +3,7 @@
 
 @section('content')
     @if (session('create_message'))
-        <div class="create-message">
+        <div class="create_message">
             {{ session('create_message') }}
         </div>
     @endif

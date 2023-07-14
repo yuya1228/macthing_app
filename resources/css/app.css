@@ -67,26 +67,18 @@ body {
 }
 
 /* フラッシュメッセージ */
-.success-message {
-    background-color: #dff0d8;
-    color: #3c763d;
+.success_message {
+    background-color: green;
+    color: white;
+    margin: 10px;
     padding: 10px;
     border: 1px solid #d6e9c6;
     border-radius: 5px;
     display: inline-block;
 }
 
-.error-message {
-    background-color: #f2dede;
-    color: #a94442;
-    padding: 10px;
-    border: 1px solid #ebccd1;
-    border-radius: 5px;
-    display: inline-block;
-}
-
 /* ユーザー登録時のメッセージ */
-.create-message {
+.create_message {
     background-color: green;
     color: white;
     padding: 10px;
@@ -175,12 +167,17 @@ body {
     background-color: greenyellow;
 }
 
-.mail_message {
-    background-color: green;
-    color: white;
-    padding: 10px;
-    border: 1px solid #ebccd1;
-    border-radius: 5px;
-    display: inline-block;
-}
 /* ここまで */
+
+/* メール受信ボックス */
+#mail_message ul li {
+    cursor: pointer;
+}
+
+#mail_message ul li:not(:first-child){
+    display: none;
+}
+
+#mail_message ul li.open{
+    display: block;
+}

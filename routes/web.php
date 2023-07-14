@@ -22,8 +22,12 @@ Route::resource('user_profile', User_ProfileController::class);
 
 // メール機能
 Route::resource('mail',MailController::class)->only(['create','store','show','delete']);
+// 指定ユーザーメール送信画面
 Route::get('/message/{user}',[MailController::class,'recipientMail'])->name('mail.recipient');
+// 指定ユーザーメール送信機能
 Route::post('/message/sendMail/{user_id}',[MailController::class,'sendMail'])->name('mail.sendMail');
+// ログインユーザーのメール受信ボックス画面
+Route::get('box',[MailController::class,'mailBox'])->name('mail.box');
 
 // admin専用画面
 Route::get('admin/admin_create',[AdminController::class,'create'])->name('admin.create');

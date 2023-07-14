@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->string('image')->unique()->comment('プロフィール画像');
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('user_id')->constrained('users');
+            $table->string('image')->nullable()->comment('プロフィール画像');
             $table->text('text')->comment('自己紹介');
             $table->integer('age')->comment('年齢');
             $table->string('hobby')->comment('趣味');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

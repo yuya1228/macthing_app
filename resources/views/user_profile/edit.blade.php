@@ -5,7 +5,7 @@
 @section('content')
 
     @if (session('update_massage'))
-        <div class="create-message">
+        <div class="create_message">
             {{ session('update_message') }}
         </div>
     @endif
@@ -38,7 +38,7 @@
                     趣味:<input type="text" name="hobby" value="{{ $user->profile->hobby }}">
                 </li>
             </ul>
-            
+
             <input type="submit" value="プロフィール更新" class="bg-green-500 hover:bg-green-300 p-2 text-white rounded-md">
         </form>
     </div>

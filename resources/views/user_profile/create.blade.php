@@ -4,7 +4,7 @@
 @section('content')
 
     @if (session('comment'))
-        <div class="create-message">
+        <div class="create_message">
             {{ session('comment') }}
         </div>
     @endif

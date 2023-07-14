@@ -1,3 +1,4 @@
+import { data } from 'autoprefixer';
 import './bootstrap';
 
 import Alpine from 'alpinejs';
