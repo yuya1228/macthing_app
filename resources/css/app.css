@@ -170,14 +170,16 @@ body {
 /* ここまで */
 
 /* メール受信ボックス */
-#mail_message ul li {
-    cursor: pointer;
+#mail_message li{
+    list-style-type: decimal;
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
 }
 
-#mail_message ul li:not(:first-child){
-    display: none;
-}
-
-#mail_message ul li.open{
-    display: block;
+.mail_back_color {
+    background-color: pink;
+    height: 300px;
+    width: 50%;
+    margin-left: 25%;
 }
