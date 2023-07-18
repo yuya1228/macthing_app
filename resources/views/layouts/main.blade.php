@@ -50,6 +50,9 @@
                 @if ($user && $user->profile)
                 <a href="{{ route('mail.box') }}">メール受信ボックス</a>
                 @endif
+                @if ($user && $user->profile)
+                <a href="{{ route('mail.sender_box') }}">メール送信ボックス</a>
+                @endif
             </div>
         </div>
         {{-- ここまで --}}

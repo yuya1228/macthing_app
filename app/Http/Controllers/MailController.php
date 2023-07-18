@@ -36,19 +36,12 @@ class MailController extends Controller
         $mail->message = $request->input('message');
         $mail->subject = $request->input('subject');
         $mail->reply = 0;
-
-        if (!is_null($id)) {
-            $original_mail = Mail::find($id);
-            if ($original_mail) {
-                $mail->reply_mail_id = $original_mail->id;
-            }
-        }
         $mail->save();
         return redirect()->route('mail.recipient', ['user' => $user_id])->with('mail_message', 'メールを送信しました。');
     }
 
     // 返信用の処理
-    public function store(MailRequest $request, $sender_id,$id)
+    public function store(MailRequest $request, $sender_id, $id)
     {
         $user = Auth::user();
         $sender = User::with('mails')->find($sender_id);
@@ -72,7 +65,27 @@ class MailController extends Controller
         return redirect()->route('mail.box')->with('mail_message', '送信しました。');
     }
 
-    // ログインユーザーのメールボックス画面
+    // 返信メール確認ページ
+    public function senderBox()
+    {
+        $user = Auth::user();
+        $user_id = $user->id;
+        $senders = Mail::with('sender')->where('sender_id',$user_id)->get();
+
+        return view('mail.sender_box',compact('senders'));
+    }
+
+    // 返信メール詳細ページ
+    public function senderBox_show($id)
+    {
+        $user_id = Auth::user()->id;
+        $mail = Mail::with('user')->where('user_id', Auth::user()->id)->first();
+        $sender = Mail::with('sender')->where('user_id', $user_id)->first();
+
+        return view('mail.sender_box_show',compact('mail','sender'));
+    }
+
+    // ログインユーザーの受信メールボックス画面
     public function mailBox()
     {
         $user = Auth::user();
@@ -88,10 +101,11 @@ class MailController extends Controller
     // 受信メール詳細画面
     public function show(string $id)
     {
+        $user_id = Auth::user()->id;
         // 送信者を取得し、ログインしているユーザーのみのデータを取得する。
         // 条件に一致した最初のデータを取得する。
         $mail = Mail::with('user')->where('user_id', Auth::user()->id)->first();
-        $sender = Mail::with('sender')->where('user_id', Auth::user()->id)->where('id', $id)->first();
+        $sender = Mail::with('sender')->where('user_id', $user_id)->first();
         return view('mail.show', compact('sender', 'mail'));
     }
 
@@ -101,5 +115,12 @@ class MailController extends Controller
         $mail = Mail::find($id);
         $mail->delete();
         return redirect()->route('mail.box');
+    }
+
+    public function sender_destroy($id)
+    {
+        $mail = Mail::find($id);
+        $mail ->delete();
+        return redirect()->route('mail.sender_box');
     }
 }
