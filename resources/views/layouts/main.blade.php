@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>マッチングサイト</title>
+    <link rel="stylesheet" href="{{ asset('css/mail.css') }}">
     @vite(['resources/css/app.css', 'resources/js/main.js'])
     <script src="{{ asset('js/mail.js') }}" defer></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -45,6 +46,9 @@
                 @else
                     <a href="{{ route('user_profile.create') }}"
                         class="text-orange-500 hover:text-red-300">プロフィールが存在しません</a>
+                @endif
+                @if ($user && $user->profile)
+                <a href="{{ route('mail.box') }}">メール受信ボックス</a>
                 @endif
             </div>
         </div>

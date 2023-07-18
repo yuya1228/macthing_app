@@ -21,11 +21,12 @@ use App\Http\Controllers\MailController;
 Route::resource('user_profile', User_ProfileController::class);
 
 // メール機能
-Route::resource('mail',MailController::class)->only(['create','store','show','delete']);
+Route::resource('mail',MailController::class)->only(['show','destroy']);
+Route::post('/mail/store/{sender_id}/{id}',[MailController::class,'store'])->name('mail.store');
 // 指定ユーザーメール送信画面
 Route::get('/message/{user}',[MailController::class,'recipientMail'])->name('mail.recipient');
 // 指定ユーザーメール送信機能
-Route::post('/message/sendMail/{user_id}',[MailController::class,'sendMail'])->name('mail.sendMail');
+Route::post('/message/sendMail/{user_id}/{id}',[MailController::class,'sendMail'])->name('mail.sendMail');
 // ログインユーザーのメール受信ボックス画面
 Route::get('box',[MailController::class,'mailBox'])->name('mail.box');
 

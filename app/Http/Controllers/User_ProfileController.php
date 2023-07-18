@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Http\UploadedFile;
 use App\Models\User;
+use App\Models\Mail;
 use App\Models\Profile;
 
 class User_ProfileController extends Controller
@@ -18,7 +19,7 @@ class User_ProfileController extends Controller
     public function index()
     {
         $profile_user = Auth::user();
-        $users = User::with('profile.gender')->paginate(6);
+        $users = User::with('profile.gender')->with('mails')->paginate(6);
         return view('user_profile.index', compact('users','profile_user'));
     }
 
