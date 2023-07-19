@@ -36,6 +36,13 @@ class MailController extends Controller
         $mail->message = $request->input('message');
         $mail->subject = $request->input('subject');
         $mail->reply = 0;
+
+        if (!is_null($id)) {
+            $original_mail = Mail::find($id);
+            if ($original_mail) {
+                $mail->reply_mail_id = $original_mail->id;
+            }
+        }
         $mail->save();
         return redirect()->route('mail.recipient', ['user' => $user_id])->with('mail_message', 'メールを送信しました。');
     }
@@ -46,7 +53,6 @@ class MailController extends Controller
         $user = Auth::user();
         $sender = User::with('mails')->find($sender_id);
         $subject = $request->subject;
-        $reply_mail = Mail::find($id);
 
         // 返信用のメールを作成
         $mail = new Mail();
@@ -55,12 +61,15 @@ class MailController extends Controller
         $mail->subject = $subject;
         $mail->message = $request->input('message');
         $mail->reply = 0;
-        $mail->reply_mail_id = $reply_mail->id;
+        $mail->reply_mail_id = $id;
         $mail->save();
 
-        // 返信用メールが送信されたらreplyカラムに1を入れて更新する。
-        $reply_mail->reply = 1;
-        $reply_mail->save();
+        // 返信用メールが送信されたら元のメールを更新し、返信フラグを1に変更する。
+        $reply_mail = Mail::find($id);
+            if($reply_mail){
+            $reply_mail->reply = 1;
+            $reply_mail->save();
+        }
 
         return redirect()->route('mail.box')->with('mail_message', '送信しました。');
     }
@@ -90,8 +99,9 @@ class MailController extends Controller
     {
         $user = Auth::user();
         $user_id = $user->id;
-        $mails = Mail::with('user')->where('user_id', $user_id)->get();
-        $senders = Mail::with('sender')->where('user_id', $user_id)->where('reply', false)->get();
+        $mails = Mail::with('user')->where('user_id', $user_id)->withTrashed()->get();
+        $senders = $mails->where('reply', false);
+
         return view('mail.box', compact('mails', 'senders'));
     }
 
@@ -104,23 +114,33 @@ class MailController extends Controller
         $user_id = Auth::user()->id;
         // 送信者を取得し、ログインしているユーザーのみのデータを取得する。
         // 条件に一致した最初のデータを取得する。
-        $mail = Mail::with('user')->where('user_id', Auth::user()->id)->first();
-        $sender = Mail::with('sender')->where('user_id', $user_id)->first();
+        $mail = Mail::with('user')->withTrashed()->where('user_id', $user_id)->first();
+        $sender = Mail::with('sender')->withTrashed()->where('user_id', $user_id)->first();
         return view('mail.show', compact('sender', 'mail'));
     }
 
-    // メール削除機能
+    // 受信メール削除機能
     public function destroy($id)
     {
-        $mail = Mail::find($id);
-        $mail->delete();
+        $mail = Mail::onlyTrashed()->find($id);
+        if($mail){
+            if($mail->trashed()){
+                $mail->forceDelete();
+            }else{
+                $mail->delete();
+            }
+        }
+
         return redirect()->route('mail.box');
     }
 
+    // 送信メール論理削除
     public function sender_destroy($id)
     {
         $mail = Mail::find($id);
-        $mail ->delete();
+        if($mail->sender_id === Auth::user()->id){
+            $mail->delete();
+        }
         return redirect()->route('mail.sender_box');
     }
 }
