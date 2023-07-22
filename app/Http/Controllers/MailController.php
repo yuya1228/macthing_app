@@ -101,7 +101,6 @@ class MailController extends Controller
         $user_id = $user->id;
         $mails = Mail::with('user')->where('user_id', $user_id)->withTrashed()->get();
         $senders = $mails->where('reply', false);
-
         return view('mail.box', compact('mails', 'senders'));
     }
 

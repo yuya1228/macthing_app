@@ -89,5 +89,23 @@ class User_ProfileSeeder extends Seeder
             'hobby' => '眠ること',
             'gender_id' => 1,
         ]);
+        DB::table('profiles')->insert([
+            'id'=>8,
+            'image'=>'hitoe9.png',
+            'user_id'=>8,
+            'text'=>'これはテストです。',
+            'age'=>20,
+            'hobby'=>'なし',
+            'gender_id'=>1,
+        ]);
+        DB::table('profiles')->insert([
+            'id' => 9,
+            'image' => 'IMG_0464.jpeg',
+            'user_id' => 9,
+            'text' => 'これはテストです。',
+            'age' => 20,
+            'hobby' => 'なし',
+            'gender_id' => 1,
+        ]);
     }
 }

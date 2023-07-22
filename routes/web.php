@@ -41,6 +41,13 @@ Route::delete('mail/message/{id}',[MailController::class,'sender_destroy'])->nam
 // admin専用画面
 Route::get('admin/admin_create', [AdminController::class, 'create'])->name('admin.create');
 Route::post('admin/store', [AdminController::class, 'store'])->name('admin.store');
+// 管理者用受信ページ
+Route::get('admin/mail',[AdminController::class,'admin_mail'])->name('admin.mail');
+
+// adminユーザーに問い合わせ機能
+Route::get('admin/sender/mail',[AdminController::class,'admin_sender_mail'])->name('admin.sender_mail');
+// adminユーザーへのメール送信機能
+Route::post('admin/mail/{mail}',[AdminController::class,'admin_sender'])->name('admin.sender');
 // ここまで
 
 // 認証機能

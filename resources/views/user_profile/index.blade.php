@@ -35,6 +35,60 @@
                 @foreach ($users as $user)
                     {{-- 一覧ページからログインユーザーは除外する処理 --}}
                     @if ($user->profile && $user->profile->user_id !== Auth::user()->id)
+
+                    {{-- roleが90以上で管理者権限を持っているユーザーは一覧画面では表示されなくなる --}}
+                        @if ($user->role < 90)
+                            <div class="flex-item">
+                                <img src="{{ asset('storage/images/' . $user->profile->image) }}" class="profile-image">
+                                <ul class="profile-info">
+                                    <li>
+                                        名前:{{ $user->name }}
+                                    </li>
+                                    <li>
+                                        自己紹介:
+                                        {{ $user->profile->text }}
+                                    </li>
+                                    <li>
+                                        趣味:{{ $user->profile->hobby }}</趣味:>
+                                    </li>
+                                    <li>
+                                        年齢:{{ $user->profile->age }}
+                                    </li>
+                                    <li>
+                                        性別:{{ $user->profile->gender->gender }}
+                                    </li>
+                                    <li class="mt-3">
+                                        <a href="{{ route('user_profile.show', ['user_profile' => $user->id]) }}"
+                                            class="bg-green-500 hover:bg-green-300 text-white p-3 rounded-md">プロフィールを確認する！</a>
+                                    </li>
+                                    <li class="mt-3 bg-blue-500 hover:bg-blue-300 inline-block rounded-md">
+                                        <a href="{{ route('mail.recipient', ['user' => $user->id]) }}">
+                                            メッセージを送る。
+                                        </a>
+                                    </li>
+                                    @can('admin')
+                                        <li>
+                                            <form action="{{ route('user_profile.destroy', ['user_profile' => $user->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="bg-red-500 hover:bg-red-300 rounded-md p-3 mt-3">削除する</button>
+                                            </form>
+                                        </li>
+                                    @endcan
+                                </ul>
+                            </div>
+                        @endif
+                    @endif
+                @endforeach
+                {{-- ここまで --}}
+
+                {{-- ログインしていないユーザーは全プロフィールを表示する。 --}}
+            @else
+                @foreach ($users as $user)
+
+                {{-- roleが90以上で管理者権限を持っているユーザーは一覧画面では表示されなくなる --}}
+                    @if ($user->role < 90)
                         <div class="flex-item">
                             <img src="{{ asset('storage/images/' . $user->profile->image) }}" class="profile-image">
                             <ul class="profile-info">
@@ -58,11 +112,6 @@
                                     <a href="{{ route('user_profile.show', ['user_profile' => $user->id]) }}"
                                         class="bg-green-500 hover:bg-green-300 text-white p-3 rounded-md">プロフィールを確認する！</a>
                                 </li>
-                                <li class="mt-3">
-                                    <a href="{{ route('mail.recipient',['user'=>$user->id]) }}">
-                                    メッセージを送る。
-                                    </a>
-                                </li>
                                 @can('admin')
                                     <li>
                                         <form action="{{ route('user_profile.destroy', ['user_profile' => $user->id]) }}"
@@ -76,47 +125,6 @@
                             </ul>
                         </div>
                     @endif
-                @endforeach
-                {{-- ここまで --}}
-
-                {{-- ログインしていないユーザーは全プロフィールを表示する。 --}}
-            @else
-                @foreach ($users as $user)
-                    <div class="flex-item">
-                        <img src="{{ asset('storage/images/' . $user->profile->image) }}" class="profile-image">
-                        <ul class="profile-info">
-                            <li>
-                                名前:{{ $user->name }}
-                            </li>
-                            <li>
-                                自己紹介:
-                                {{ $user->profile->text }}
-                            </li>
-                            <li>
-                                趣味:{{ $user->profile->hobby }}</趣味:>
-                            </li>
-                            <li>
-                                年齢:{{ $user->profile->age }}
-                            </li>
-                            <li>
-                                性別:{{ $user->profile->gender->gender }}
-                            </li>
-                            <li class="mt-3">
-                                <a href="{{ route('user_profile.show', ['user_profile' => $user->id]) }}"
-                                    class="bg-green-500 hover:bg-green-300 text-white p-3 rounded-md">プロフィールを確認する！</a>
-                            </li>
-                            @can('admin')
-                                <li>
-                                    <form action="{{ route('user_profile.destroy', ['user_profile' => $user->id]) }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="bg-red-500 hover:bg-red-300 rounded-md p-3 mt-3">削除する</button>
-                                    </form>
-                                </li>
-                            @endcan
-                        </ul>
-                    </div>
                 @endforeach
             @endauth
         </div>
