@@ -54,8 +54,10 @@
                 @elseif($user && $user->profile && $user->role >= 90)
                 <li><a href="{{ route('admin.mail') }}">管理者メールボックス</a></li>
                 @endif
-                @if ($user && $user->profile)
+                @if ($user && $user->profile && $user->role <= 89)
                     <a href="{{ route('mail.sender_box') }}">メール送信ボックス</a>
+                    @elseif ($user && $user->profile && $user->role >= 90)
+                    <a href="{{ route('admin.mail_box') }}">管理者返信メールボックス</a>
                 @endif
             </div>
         </div>
