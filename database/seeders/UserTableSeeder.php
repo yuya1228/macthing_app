@@ -19,6 +19,7 @@ class UserTableSeeder extends Seeder
             'name'=>'スポンジ・ボブ',
             'email'=>'Suponji@gmail.com',
             'password'=>Hash::make('suponji'),
+            'role'=>1,
         ]);
 
         DB::table('users')->insert([
@@ -26,6 +27,7 @@ class UserTableSeeder extends Seeder
             'name' => 'パトリック',
             'email' => 'Patoric@gmail.com',
             'password' => Hash::make('patrick'),
+            'role' => 2
         ]);
 
         DB::table('users')->insert([
@@ -33,6 +35,7 @@ class UserTableSeeder extends Seeder
             'name' => 'イカルド',
             'email' => 'Ikarud@gmail.com',
             'password' => Hash::make('ikarud'),
+            'role' => 3
         ]);
 
         DB::table('users')->insert([
@@ -40,6 +43,7 @@ class UserTableSeeder extends Seeder
             'name' => 'カーニーさん',
             'email' => 'Kani@gmail.com',
             'password' => Hash::make('kani'),
+            'role' => 4
         ]);
 
         DB::table('users')->insert([
@@ -47,6 +51,7 @@ class UserTableSeeder extends Seeder
             'name' => 'プランクトン',
             'email' => 'Prancton@gmail.com',
             'password' => Hash::make('prancton'),
+            'role' => 5
         ]);
 
         DB::table('users')->insert([
@@ -54,6 +59,7 @@ class UserTableSeeder extends Seeder
             'name' => 'サンディ',
             'email' => 'Sandy@gmail.com',
             'password' => Hash::make('sandy'),
+            'role' => 6
         ]);
 
         DB::table('users')->insert([
@@ -61,6 +67,7 @@ class UserTableSeeder extends Seeder
             'name' => 'ゲイリー',
             'email' => 'Geily@gmail.com',
             'password' => Hash::make('geily'),
+            'role' => 7
         ]);
 
         DB::table('users')->insert([
@@ -68,6 +75,7 @@ class UserTableSeeder extends Seeder
             'name' => 'テストユーザー1',
             'email' => 'test1@gmail.com',
             'password' => Hash::make('test1'),
+            'role' => 91
         ]);
 
         DB::table('users')->insert([
@@ -75,6 +83,7 @@ class UserTableSeeder extends Seeder
             'name' => 'テストユーザー2',
             'email' => 'test2@gmail.com',
             'password' => Hash::make('test2'),
+            'role' => 8
         ]);
     }
 }

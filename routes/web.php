@@ -56,7 +56,7 @@ Route::delete('admin/mail/{id}', [AdminController::class, 'admin_mail_delete'])-
 // 管理者の返信ボックス
 Route::get('admin/sender/box',[AdminController::class,'admin_mail_box'])->name('admin.mail_box');
 // 返信機能
-Route::post('admin/mail/{sender_id}/{id}',[AdminController::class,'sender_mail'])->name('sender_mail');
+Route::post('admin/mail/{sender_id}/{id}',[AdminController::class,'sender_mail'])->name('admin.sender.mail');
 // 管理者返信メール削除
 Route::delete('admin/sender_mail/{id}',[AdminController::class,'sender_mail_delete'])->name('sender.delete');
 // ここまで

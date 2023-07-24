@@ -124,7 +124,7 @@ class AdminController extends Controller
             $reply_mail->reply = 1;
             $reply_mail->save();
         }
-        return redirect('admin.box')->with('mail_message', '送信しました。');
+        return redirect()->route('admin.box')->with('mail_message', '送信しました。');
     }
 
     // 管理者宛のメール削除機能

@@ -33,11 +33,13 @@
                         </form>
                     </li>
                 @endcan
-                <li class="mt-3 p-2 bg-blue-500 hover:bg-blue-300 inline-block rounded-md">
-                    <a href="{{ route('mail.recipient', ['user' => $users->id]) }}">
-                        メッセージを送る。
-                    </a>
-                </li>
+                @can('user')
+                    <li class="mt-3 p-2 bg-blue-500 hover:bg-blue-300 inline-block rounded-md">
+                        <a href="{{ route('mail.recipient', ['user' => $users->id]) }}">
+                            メッセージを送る。
+                        </a>
+                    </li>
+                @endcan
                 <button class="mt-5"><a href="{{ route('user_profile.index') }}"
                         class="bg-green-500 hover:bg-green-300 p-3 text-white rounded-md ">一覧に戻る</a></button>
             </ul>
