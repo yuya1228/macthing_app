@@ -14,12 +14,13 @@ body {
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;
-    height: 100%;
+    min-height: 100%;
     width: 100%;
+    margin-bottom: 40px;
 }
 
 .html_position {
-    position: 'relative';
+    position: relative;
     min-height: 100vh;
     padding-bottom: 60px;
     box-sizing: border-box;
@@ -77,9 +78,12 @@ body {
 footer {
     background-color: rgb(0, 0, 0);
     color: white;
-    padding: 70px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
     width: 100%;
-    position: absolute;
+    padding: 20px;
+    text-align: center;
 }
 
 /* フラッシュメッセージ */
@@ -151,4 +155,48 @@ footer {
 
 .profile-create li {
     padding: 1%;
+}
+
+/* レスポンシブデザイン */
+@media screen and (max-width: 480px) {
+    .text-center a {
+        border-radius: 10px;
+    }
+
+    .flex-container {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .flex-item {
+        width: 100%;
+    }
+
+    .flex-item li {
+        font-size: 70%;
+    }
+
+    /* 詳細画面レスポンシブデザイン */
+    .profile {
+        width: 70%;
+    }
+
+    .profile li {
+        font-size: 70%;
+    }
+
+    .profile button {
+        font-size: 15px;
+    }
+
+    footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: black;
+        padding: 20px;
+        text-align: center;
+    }
 }

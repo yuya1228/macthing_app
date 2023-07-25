@@ -8,7 +8,6 @@
     <title>マッチングサイト</title>
     <link rel="stylesheet" href="{{ asset('css/mail.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin_mail.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/mobile.css') }}" media="(max-width:400px)">
     @vite(['resources/css/app.css', 'resources/js/main.js'])
     <script src="{{ asset('js/mail.js') }}" defer></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -67,10 +66,13 @@
         @yield('content')
         <footer>
             <ul class="footer_menu">
-                @if ($user && $user->profile)
+                @if ($user && $user->profile && $user->role <= 90)
                     <li><a href="{{ route('admin.sender_mail') }}">-お問い合わせメール</a></li>
+                @elseif($user && $user->profile && $user->role >= 90)
+                <li><a href="{{ route('admin.mail') }}">お問い合わせメール確認</a></li>
+                @else
+                <li><a href="{{ route('register') }}">新規登録</a></li>
                 @endif
-                <li><a href="{{ route('register') }}">-お問い合わせメール</a></li>
             </ul>
             <p class="copyright">© 2023 Example Inc. All Rights Reserved.</p>
         </footer>
