@@ -77,8 +77,7 @@ class MailController extends Controller
     // 返信メール確認ページ
     public function senderBox()
     {
-        $user = Auth::user();
-        $user_id = $user->id;
+        $user_id = Auth::user()->id;
         $senders = Mail::with('sender')->where('sender_id',$user_id)->get();
 
         return view('mail.sender_box',compact('senders'));
@@ -88,10 +87,8 @@ class MailController extends Controller
     public function senderBox_show($id)
     {
         $user_id = Auth::user()->id;
-        $mail = Mail::with('user')->where('user_id', Auth::user()->id)->first();
-        $sender = Mail::with('sender')->where('user_id', $user_id)->first();
-
-        return view('mail.sender_box_show',compact('mail','sender'));
+        $sender = Mail::with('sender')->where('sender_id', $user_id)->first();
+        return view('mail.sender_box_show',compact('sender'));
     }
 
     // ログインユーザーの受信メールボックス画面
