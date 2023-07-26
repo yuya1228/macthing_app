@@ -54,7 +54,7 @@ class AdminController extends Controller
     {
         $user = Auth::user();
         $user_id = $user->id;
-        $mails = Mail::with('user')->where('user_id', $user_id)->withTrashed()->get();
+        $mails = Mail::with('user')->where('user_id', $user_id)->whereNull('deleted_at')->get();
         $senders = $mails->where('reply', false);
         return view('admin.mail', compact('senders'));
     }
@@ -72,8 +72,7 @@ class AdminController extends Controller
     // 管理者用受信メール詳細画面
     public function admin_mail_show($id)
     {
-        $user = Auth::user()->id;
-        $mail = Mail::with('user')->where('user_id', $user)->find($id);
+        $mail = Mail::with('user')->find($id);
         return view('admin.show', compact('mail'));
     }
 
@@ -124,7 +123,7 @@ class AdminController extends Controller
             $reply_mail->reply = 1;
             $reply_mail->save();
         }
-        return redirect()->route('admin.box')->with('mail_message', '送信しました。');
+        return redirect()->route('admin.mail')->with('mail_message', '送信しました。');
     }
 
     // 管理者宛のメール削除機能
